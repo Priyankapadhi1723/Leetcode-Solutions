@@ -1,0 +1,28 @@
+class Solution {
+public:
+    long long maxSum(vector<int>& nums, int m, int k) {
+        long long maxSum = 0;
+        long long currentSum = 0;
+        unordered_map<int, int> elementFrequency;
+        int left = 0;
+        for (int right = 0; right < nums.size(); right++) {
+            int currentElement = nums[right];
+            elementFrequency[currentElement]++;
+            currentSum += currentElement;
+            while (right - left + 1 > k) {
+                int leftElement = nums[left];
+                elementFrequency[leftElement]--;
+                if (elementFrequency[leftElement] == 0) {
+                    elementFrequency.erase(leftElement);
+                }
+                currentSum -= leftElement;
+                left++;
+            }
+            if (elementFrequency.size() >= m) {
+                maxSum = max(maxSum, currentSum);
+            }
+        }
+
+        return maxSum;
+    }
+};
