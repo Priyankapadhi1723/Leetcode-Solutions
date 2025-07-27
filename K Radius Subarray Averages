@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> getAverages(vector<int>& nums, int k) {
+       int i=0;
+       int j=0;
+       int n=nums.size();
+       long long wsum=0;
+       int wsize=(2*k)+1;
+       vector<int>answer(n,-1);
+       if(wsize>n){
+        return answer;
+       }
+       while(j<n){
+        wsum+=nums[j];
+        if(j-i+1<wsize){
+            j++;
+        }
+        else if(j-i+1==wsize){
+            answer[i+k]=wsum/wsize;
+            wsum-=nums[i];
+            i++;
+            j++;
+        }
+       }
+       return answer;
+    }
+};
