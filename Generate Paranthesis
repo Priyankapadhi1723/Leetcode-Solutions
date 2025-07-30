@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+      vector<string>ans;
+       f(ans,n,n,"");
+return ans;
+
+
+    }
+        void f(vector<string>&ans,int op, int close,string s){
+            if(op==0&&close==0){
+                ans.push_back(s);
+                return;
+            }
+            if(op>0){
+                f(ans,op-1,close,s+'(');
+            }
+            if(op<close){
+                f(ans,op,close-1,s+')');
+            }
+          
+        
+        }
+};
