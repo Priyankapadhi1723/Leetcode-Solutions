@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int minDiffInBST(TreeNode* root) {
+        vector<int>ans;
+        inorder(root,ans);
+        int n=ans.size();
+        int mind=INT_MAX;
+        for(int i=1; i<n; i++){
+            mind=min(mind,ans[i]-ans[i-1]);
+        }
+        return mind;
+    }
+    void inorder(TreeNode*root,vector<int>&ans){
+        if(root==NULL){
+            return;
+        }
+        inorder(root->left, ans);
+        ans.push_back(root->val);
+        inorder(root->right,ans);
+    }
+};
