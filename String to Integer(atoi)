@@ -1,0 +1,40 @@
+class Solution
+{
+public:
+    int myAtoi(string s)
+    {
+        long lAns      = 0;
+        int  i         = 0;
+        int  iMax      = s.size();
+        bool bLegalNbr = true;
+        bool bIsNeg    = false;
+
+
+        while ((i < iMax) && (s[i] == ' ')) { i++; }
+
+        if (i < iMax)
+        {
+            if      (s[i] == '-') { i++; bIsNeg = true; } 
+            else if (s[i] == '+') { i++; }
+        }
+
+        while ((i < iMax) &&      (48 <= s[i]) && (s[i] <= 57)
+                          && (INT_MIN <= lAns) && (lAns <= INT_MAX))
+        {
+            lAns *= 10;
+
+            if (bIsNeg)
+                lAns -= s[i]-48;
+            else
+                lAns += s[i]-48;
+
+            i++;
+        }
+
+
+        if (INT_MIN > lAns) lAns = INT_MIN;
+        if (INT_MAX < lAns) lAns = INT_MAX;
+        
+        return lAns;
+    }
+};
